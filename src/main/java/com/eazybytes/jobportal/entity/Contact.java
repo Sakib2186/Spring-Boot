@@ -43,10 +43,10 @@ public class Contact {
     @Column(name="CREATED_BY",nullable = false,length = 20)
     private String createdBy;
 
-    @Column(name="UPDATED_AT",nullable = false)
+    @Column(name="UPDATED_AT",nullable = true)
     private Instant updatedAt;
 
-    @Column(name="UPDATED_BY",nullable = false,length = 20)
+    @Column(name="UPDATED_BY",nullable = true,length = 20)
     private String updatedBy;
 
 
