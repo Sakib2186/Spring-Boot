@@ -30,9 +30,9 @@ public class ContactController {
 
     @GetMapping(version = "1.0",path="/")
     public ResponseEntity<String> fetchOpenContacts(@RequestParam @Validated
-                                                        @NotBlank(message="Status is required")
-                                                        @Size(min=4,message = "Status length should be of minimum 4 chars")
-                                                        String status){
+                                                    @NotBlank(message="Status is required")
+                                                    @Size(min=4,message = "Status length should be of minimum 4 chars")
+                                                    String status){
         return ResponseEntity.ok().body("Status: "+status);
     }
 }
