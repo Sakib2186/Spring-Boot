@@ -32,8 +32,9 @@ public class ContactServiceImpl implements IContactService {
     private Contact transferToEntity(ContactRequestDto contactRequestDto){
         Contact contact = new Contact();
         BeanUtils.copyProperties(contactRequestDto,contact); // source, destination to copy fields. ony for exact mathcing field name as entity and class
-        contact.setCreatedAt(Instant.now());
-        contact.setCreatedBy("System");
+        // contact.setCreatedAt(Instant.now());
+        // contact.setCreatedBy("System");
+        // Now done by Auditing
         contact.setStatus("NEW");
         return contact;
     }
