@@ -11,7 +11,7 @@ import java.time.Instant;
 @Table(name="CONTACT")
 @Getter
 @Setter
-public class Contact {
+public class Contact extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,18 +36,6 @@ public class Contact {
     @ColumnDefault("'NEW'")
     @Column(name="STATUS",nullable = false,length = 20)
     private String status;
-
-    @Column(name="CREATED_AT",nullable = false)
-    private Instant createdAt;
-
-    @Column(name="CREATED_BY",nullable = false,length = 20)
-    private String createdBy;
-
-    @Column(name="UPDATED_AT",nullable = true)
-    private Instant updatedAt;
-
-    @Column(name="UPDATED_BY",nullable = true,length = 20)
-    private String updatedBy;
 
 
 

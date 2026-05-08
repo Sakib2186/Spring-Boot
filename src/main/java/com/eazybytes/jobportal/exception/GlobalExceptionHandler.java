@@ -55,6 +55,8 @@ public class GlobalExceptionHandler {
             errors.put(paramName,combinedMessages);
         });
 
+        return ResponseEntity.badRequest().body(errors);
+
     }
 
     @ExceptionHandler(NullPointerException.class) // if NullPointerException only hadnles nullpointer
