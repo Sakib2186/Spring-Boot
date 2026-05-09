@@ -55,4 +55,12 @@ public class Company extends BaseEntity{
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true) // orphanRemove removes the record from the DB and alos from the list. if false, only from the list, remians in the DB
     private List<Job> jobs = new ArrayList<>();
 
+    // CascadeType.All
+    // CascadeType.PERSISTENT // Saves child entity when parent is saved
+    // CascadeType.MERGE // Updates child entity when parent is updated
+    // CascadeType.REMOVE // Deltes child entity when parent is deleted
+    // CascadeType.REFRESH // Refreshes child when parent is refreshed from DB
+    // CascadeType.DETACH  // Detaches the child from persistence context when parent is detached
+    // Applies all changes
+
 }
