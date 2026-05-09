@@ -52,6 +52,7 @@ public class Company extends BaseEntity{
     private String website;
 
     // this attribute is not present in the SQL but mentioned here to get list of all jobs for a company
+    // CASCADEType is performed by hibernate so is slower. @OnDelete is faster as DB does it.
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true) // orphanRemove removes the record from the DB and alos from the list. if false, only from the list, remians in the DB
     private List<Job> jobs = new ArrayList<>();
 

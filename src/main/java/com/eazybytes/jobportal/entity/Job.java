@@ -29,9 +29,15 @@ public class Job extends BaseEntity {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false) // LAZY, returns only job info, no company. EAGER returns full join information
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.CASCADE) // it directly works with database (faster),where as CASCADE.Type is handled by Hiberanate Framework (slower)
     @JoinColumn(name = "company_id", nullable = false) // Foreign key should have JoinColumn with column name
     private Company company;
+
+    // OnDeleteAction.CASCADE //automatically delete the child records
+    // OnDeleteAction.NO_ACTION //When parent is being deleted and its child exits DB will throw error, like normal behaviour
+    // OnDeleteAction.RESTRICT //Prevents deletion of parent if child exists
+    // OnDeleteAction.SET_NULL // sets child entitiy to null in the column
+    // OnDeleteAction.SET_DEFAULT // sets a default value
 
     @Size(max = 255)
     @NotNull
