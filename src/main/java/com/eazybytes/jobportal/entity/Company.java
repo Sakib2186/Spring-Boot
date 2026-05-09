@@ -7,6 +7,8 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="COMPANIES")
@@ -48,5 +50,9 @@ public class Company extends BaseEntity{
 
     @Column(name="WEBSITE",length = 500)
     private String website;
+
+    // this attribute is not present in the SQL but mentioned here to get list of all jobs for a company
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true) // orphanRemove removes the record from the DB and alos from the list. if false, only from the list, remians in the DB
+    private List<Job> jobs = new ArrayList<>();
 
 }
