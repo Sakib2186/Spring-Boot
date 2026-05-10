@@ -1,7 +1,9 @@
 package com.eazybytes.jobportal.company.controller.service.impl;
 
 import com.eazybytes.jobportal.Dto.CompanyDto;
+import com.eazybytes.jobportal.Dto.JobDto;
 import com.eazybytes.jobportal.entity.Company;
+import com.eazybytes.jobportal.entity.Job;
 import com.eazybytes.jobportal.repository.CompanyRepository;
 import com.eazybytes.jobportal.company.controller.service.ICompanyService;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +28,45 @@ public class CompanyServiceImpl implements ICompanyService {
     @Override
     public List<CompanyDto> getAllCompanies() {
         List<Company> companies = companyRepository.findAll();
-        return companies.stream().map(this::transfetToDto).collect(Collectors.toList());
+        return companies.stream().map(this::transferToDto).collect(Collectors.toList());
     }
 
-    private CompanyDto transfetToDto(Company company){
+    private CompanyDto transferToDto(Company company){
+        List<JobDto> jobsDtos = company.getJobs().stream().map(this::transformToDto).toList();
         return new CompanyDto(company.getId(),company.getName(),company.getLogo(),
                 company.getIndustry(),company.getSize(),company.getRating(),company.getLocations(),
                 company.getFounded(),company.getDescription(),company.getEmployees(),
-                company.getWebsite(),company.getCreatedAt());
+                company.getWebsite(),company.getCreatedAt(),
+                jobsDtos);
 
+    }
+
+    private JobDto transformToDto(Job job){
+        return new JobDto(
+                job.getId(),
+                job.getTitle(),
+                job.getCompany().getId(),
+                job.getCompany().getName(),
+                job.getCompany().getLogo(),
+                job.getLocation(),
+                job.getWorkType(),
+                job.getJobType(),
+                job.getCategory(),
+                job.getExperienceLevel(),
+                job.getSalaryMin(),
+                job.getSalaryMax(),
+                job.getSalaryCurrency(),
+                job.getSalaryPeriod(),
+                job.getDescription(),
+                job.getRequirements(),
+                job.getBenefits(),
+                job.getPostedDate(),
+                job.getApplicationDeadline(),
+                job.getApplicationsCount(),
+                job.getFeatured(),
+                job.getUrgent(),
+                job.getRemote(),
+                job.getStatus()
+        );
     }
 }

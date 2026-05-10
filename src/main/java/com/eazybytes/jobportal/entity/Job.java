@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity
-@Table(name="job")
+@Table(name="jobs")
 @Getter @Setter
 public class Job extends BaseEntity {
     @Id
