@@ -19,6 +19,8 @@ public class WebConfig implements WebMvcConfigurer {
         configurer.addPathPrefix("/api",_->true);
     }
 
+
+    // If spring security is added as a dependency then this won't work anymore,  need to configure from spring security
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
