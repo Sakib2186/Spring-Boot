@@ -15,12 +15,17 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity // optional
 public class JobPortalSecurityConfig {
 
+    // This method is copied from SecurityFilterChain.
     @Bean
     //@Order(SecurityFilterProperties.BASIC_AUTH_ORDER) can define order if you you use multiple security service with order
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) {
         return http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated())
-                .formLogin(withDefaults())
-                .httpBasic(withDefaults())
+                //.formLogin(withDefaults())
+                //if you dont want to use HTTP login form everytime then
+                .formLogin(flc->flc.disable()) // flc = form login control. Now wont take you to login page, but would give 401 Unauthorized
+                .httpBasic(withDefaults()) // hbc -> hbc.disable()
                 .build();
+
+                // for pure REST configuration best to disable form login and keep httpBasic. Standard practise
     }
 }
