@@ -18,7 +18,7 @@ public class ContactController {
 
     private final IContactService contactService;
 
-    @PostMapping(version = "1.0",path = "/create")
+    @PostMapping(version = "1.0",path = "/public")
     public ResponseEntity<String> createContact(@RequestBody @Valid ContactRequestDto contactRequestDto){
         boolean created = contactService.createContact(contactRequestDto);
         if (created){
