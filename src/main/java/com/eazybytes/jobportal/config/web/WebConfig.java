@@ -21,14 +21,15 @@ public class WebConfig implements WebMvcConfigurer {
 
 
     // If spring security is added as a dependency then this won't work anymore,  need to configure from spring security
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**")
-                .allowCredentials(true)
-                .maxAge(3600)
-                .allowedOrigins("https://localhost:3000")
-                .allowedMethods("*")
-                .allowedHeaders("*")
-                .exposedHeaders("*");
-    }
+    // webconfig for CORS in added in security
+    //    @Override
+    //    public void addCorsMappings(CorsRegistry registry) {
+    //        registry.addMapping("/api/**")
+    //                .allowCredentials(true)
+    //                .maxAge(3600)
+    //                .allowedOrigins("https://localhost:3000")
+    //                .allowedMethods("*")
+    //                .allowedHeaders("*")
+    //                .exposedHeaders("*");
+    //    }
 }
