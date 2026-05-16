@@ -9,6 +9,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
@@ -74,5 +79,24 @@ public class JobPortalSecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(){
+        // returns user details
+        // telling spring security whenever i want to fetch or create user details use this bean
+
+        // creating a user
+        var user1 = User.builder().username("sami").password(passwordEncoder().encode("sami@123")).roles("USER").build();
+        var user2 = User.builder().username("admin").password(passwordEncoder().encode("admin@123")).roles("ADMIN").build();
+        // This way create any number of users
+
+        return new InMemoryUserDetailsManager(user1,user2); // any number of user details
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder(); // so whenever someone is registering or logging in use BCryptPassword encoder
+        // SCryptPasswordEncoder(); // another one
     }
 }
